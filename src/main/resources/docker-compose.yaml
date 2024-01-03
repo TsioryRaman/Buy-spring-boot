@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.1
+    volumes:
+      - db-data-buy:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: buy
+      MYSQL_USER: buy
+      MYSQL_DATABASE: buy
+    ports:
+      - 3306:3306
+volumes:
+  db-data-buy:
+    driver: local
