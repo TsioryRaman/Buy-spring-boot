@@ -5,7 +5,7 @@ import com.commerce.buy.domain.product.model.Product;
 
 import java.util.Date;
 
-public class ProductDto implements EntityDto {
+public class ProductDto implements EntityDto<Product> {
     private String name;
 
     private String description;
@@ -57,12 +57,12 @@ public class ProductDto implements EntityDto {
     }
 
     @Override
-    public Object getEntity() {
+    public Product getEntity() {
         return this.product;
     }
 
     @Override
-    public void setEntity(Object object) {
-        this.product = (Product) object;
+    public void setEntity(Product entity) {
+        this.product = entity;
     }
 }

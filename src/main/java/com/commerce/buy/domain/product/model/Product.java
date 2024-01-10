@@ -1,5 +1,6 @@
 package com.commerce.buy.domain.product.model;
 
+import com.commerce.buy.domain.category.model.Category;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -18,7 +19,9 @@ public class Product {
     private String description;
     private double price;
     private int liked;
-
+    @ManyToOne()
+    @JoinColumn(name = "category_id",referencedColumnName = "id")
+    private Category category;
     @CreationTimestamp
     private Date created_at;
     @UpdateTimestamp

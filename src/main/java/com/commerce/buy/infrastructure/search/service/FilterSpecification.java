@@ -15,12 +15,21 @@ public class FilterSpecification<T> {
         OR,
         AND
     }
+
+    /**
+     * Filtre par nom chaque entite
+     * @param searchRequestDto SearchRequestDto
+     * @param type TYPE
+     * @return Specification<T>
+     */
     public Specification<T> getSearchSpecification(SearchRequestDto searchRequestDto,TYPE type)
     {
-        System.out.println("searchRequestDto = " + searchRequestDto.getName());
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(searchRequestDto.getName()),"%"+ searchRequestDto.getValue()+"%");
     }
 
+    /**
+     * Filtre par cle d'entite chaque entite en parametre un tableau de parametre
+     */
     public Specification<T> getSearchSpecification(List<SearchRequestDto> searchRequestDto,TYPE type)
     {
         return ((root, query, criteriaBuilder) -> {
@@ -29,8 +38,6 @@ public class FilterSpecification<T> {
            for(SearchRequestDto searchDto: searchRequestDto)
            {
                Predicate equal =  criteriaBuilder.equal(root.get(searchDto.getName()),searchDto.getValue());
-               System.out.println("searchRequestDto = " + searchDto.getValue());
-
                predicates.add(equal);
            }
            if(type == TYPE.OR)

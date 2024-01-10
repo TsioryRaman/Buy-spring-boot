@@ -3,10 +3,10 @@ package com.commerce.buy.domain;
 import jakarta.persistence.Entity;
 import org.springframework.http.ResponseEntity;
 
-public interface EntityDto {
+public interface EntityDto<T> {
     void hydrate();
 
-    Object getEntity();
+    T getEntity();
 
-    void setEntity(Object object);
+    void setEntity(T entity);
 }

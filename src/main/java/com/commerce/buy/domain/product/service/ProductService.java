@@ -1,8 +1,11 @@
 package com.commerce.buy.domain.product.service;
 
-import com.commerce.buy.domain.CrudServiceInterface;
+import com.commerce.buy.http.service.CrudAdvancedServiceInterface;
+import com.commerce.buy.http.service.CrudFindServiceInterface;
+import com.commerce.buy.http.service.CrudServiceInterface;
 import com.commerce.buy.domain.EntityDto;
 import com.commerce.buy.domain.product.event.ProductCreatedEvent;
+import com.commerce.buy.domain.product.event.ProductViewEvent;
 import com.commerce.buy.domain.product.model.Product;
 import com.commerce.buy.infrastructure.search.dto.RequestDto;
 import com.commerce.buy.infrastructure.search.dto.SearchRequestDto;
@@ -16,9 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Service
-public class ProductService implements CrudServiceInterface<Product>{
+public class ProductService implements CrudAdvancedServiceInterface<Product> {
 
     @Autowired
     ProductRepository productRepository;
@@ -26,9 +28,10 @@ public class ProductService implements CrudServiceInterface<Product>{
     FilterSpecification<Product> filterProduct;
     @Autowired
     ApplicationEventPublisher eventPublisher;
+
     @Override
-    public ResponseEntity<Product> create(EntityDto productDto) throws Exception {
-        try{
+    public ResponseEntity<Product> create(EntityDto<Product> productDto) throws Exception {
+        try {
             Product product = new Product();
             productDto.setEntity(product);
             productDto.hydrate();
@@ -37,29 +40,30 @@ public class ProductService implements CrudServiceInterface<Product>{
             this.eventPublisher.publishEvent(new ProductCreatedEvent(product));
 
             return new ResponseEntity<Product>(product, HttpStatus.CREATED);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
     public ResponseEntity<List<Product>> getAll() {
-        List<Product> products = new ArrayList<>();
-        this.productRepository.findAll().forEach(products::add);
+        List<Product> products = new ArrayList<>(this.productRepository.findAll());
 
-        return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
+        return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Product> getById(int id) {
+
         Product product = this.productRepository.findById(id).get();
-        return new ResponseEntity<Product>(product,HttpStatus.OK);
+        this.eventPublisher.publishEvent(new ProductViewEvent(product));
+
+        return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
     @Override
-    public Product findByName(String name){
-        Product product  = this.productRepository.findByName(name);
+    public Product findByName(String name) {
+        Product product = this.productRepository.findByName(name);
         System.out.println("name = " + product.getName());
         return product;
     }
