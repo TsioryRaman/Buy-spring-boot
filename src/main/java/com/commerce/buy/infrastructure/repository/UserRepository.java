@@ -1,4 +1,4 @@
-package com.commerce.buy.infrastructure.validation.repository;
+package com.commerce.buy.infrastructure.repository;
 
 import com.commerce.buy.domain.user.model.User;
 import org.springframework.data.repository.CrudRepository;

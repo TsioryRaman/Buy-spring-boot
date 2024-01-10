@@ -1,6 +1,10 @@
 package com.commerce.buy.domain.user.model;
 
+import com.commerce.buy.domain.blog.model.Blog;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class User {
@@ -16,7 +20,20 @@ public class User {
     private String description;
 
     @OneToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
+    @JsonIgnore()
     private Address address;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JsonIgnore()
+    private Set<Blog> blog;
+
+    public Set<Blog> getBlog() {
+        return blog;
+    }
+
+    public void addBlog(Blog blog) {
+        this.blog.add(blog);
+    }
 
     public Address getAddress()
     {

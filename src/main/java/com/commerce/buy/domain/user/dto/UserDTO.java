@@ -14,7 +14,7 @@ public class UserDTO {
     public Address getAddress(){return this.address;}
     public void setAddress(Address address){this.address = address;}
     public String getUsername() {
-        return username;
+        return this.username;
     }
     public void setUsername(String username) {
         this.username = username;

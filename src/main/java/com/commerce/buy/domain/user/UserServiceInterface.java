@@ -3,14 +3,17 @@ package com.commerce.buy.domain.user;
 import com.commerce.buy.domain.DomainServiceInterface;
 import com.commerce.buy.domain.user.dto.UserDTO;
 import com.commerce.buy.domain.user.model.User;
+import com.commerce.buy.infrastructure.exception.NoSuchEntityException;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface UserServiceInterface extends DomainServiceInterface {
+public interface UserServiceInterface {
     public ResponseEntity<User> create(UserDTO userDTO);
 
     List<User> getAllUsers();
 
-    ResponseEntity<User> update(int id,UserDTO userDTO);
+    ResponseEntity<User> update(int id,UserDTO userDTO) throws NoSuchEntityException;
+
+    ResponseEntity<User> delete(int id) throws NoSuchEntityException;
 }
