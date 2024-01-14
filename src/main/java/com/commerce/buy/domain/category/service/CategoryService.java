@@ -4,10 +4,8 @@ import com.commerce.buy.domain.EntityDto;
 import com.commerce.buy.domain.category.dao.CategoryDao;
 import com.commerce.buy.domain.category.model.Category;
 import com.commerce.buy.http.service.CrudServiceInterface;
-import com.commerce.buy.infrastructure.search.dto.SearchRequestDto;
 import com.commerce.buy.infrastructure.search.service.FilterSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,7 @@ public class CategoryService implements CrudServiceInterface<Category> {
     FilterSpecification<Category> filter;
 
     @Override
-    public ResponseEntity<Category> create(EntityDto<Category> entityDto) throws Exception {
+    public ResponseEntity<Category> create(EntityDto<Category> entityDto) {
         Category category = new Category();
         this.categoryDao.setCategory(category);
         return new ResponseEntity<>(this.categoryDao.create(entityDto), HttpStatus.CREATED);

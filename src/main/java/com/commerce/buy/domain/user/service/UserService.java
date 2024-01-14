@@ -1,7 +1,8 @@
 package com.commerce.buy.domain.user.service;
 
 import com.commerce.buy.domain.user.event.UserCreatedEvent;
-import com.commerce.buy.infrastructure.exception.NoSuchEntityException;
+import com.commerce.buy.infrastructure.exception.entityException.ConflictException;
+import com.commerce.buy.infrastructure.exception.entityException.NoSuchEntityException;
 import com.commerce.buy.infrastructure.repository.UserRepository;
 import com.commerce.buy.domain.user.dto.UserDTO;
 import com.commerce.buy.domain.user.UserServiceInterface;
@@ -28,6 +29,12 @@ public class UserService implements UserServiceInterface {
     @Override
     public ResponseEntity<User> create(UserDTO userDTO) {
         User user = new User();
+        System.out.println("userDTO = " + userDTO + " existe t-il? " + this.userRepository.existsByUsername(userDTO.getUsername()));
+        if(this.userRepository.existsByUsername(userDTO.getUsername()))
+        {
+            System.out.println("userDTO = " + userDTO.getUsername()+ " existe deja");
+            throw new ConflictException("Le nom d'utilisateur existe deja");
+        }
         user.setUsername(userDTO.getUsername());
         user.setDescription(userDTO.getDescription());
         user.setAddress(userDTO.getAddress());

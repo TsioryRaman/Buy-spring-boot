@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface ProductRepository extends JpaRepository<Product,Integer>, JpaSpecificationExecutor<Product> {
     Product findByName(String name);
+
+    Boolean existsByName(String name);
 }

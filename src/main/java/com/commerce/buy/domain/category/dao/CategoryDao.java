@@ -5,6 +5,7 @@ import com.commerce.buy.domain.EntityDto;
 import com.commerce.buy.domain.category.dto.CategoryDto;
 import com.commerce.buy.domain.category.model.Category;
 import com.commerce.buy.infrastructure.repository.CategoryRepository;
+import com.commerce.buy.infrastructure.search.dto.RequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,11 @@ public class CategoryDao implements EntityDao<Category> {
     }
 
     @Override
+    public Category findById(int id) {
+        return null;
+    }
+
+    @Override
     public Category delete(int entityId) {
         return null;
     }
@@ -51,6 +57,11 @@ public class CategoryDao implements EntityDao<Category> {
 
     @Override
     public List<Category> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Category> findByField(List<RequestDto> requestDtos) {
         return null;
     }
 }

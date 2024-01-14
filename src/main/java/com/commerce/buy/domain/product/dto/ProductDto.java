@@ -3,11 +3,19 @@ package com.commerce.buy.domain.product.dto;
 import com.commerce.buy.domain.EntityDto;
 import com.commerce.buy.domain.product.model.Product;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class ProductDto implements EntityDto<Product> {
+    @NotEmpty
+    @NotNull
+    @Size(min = 4,max = 255)
     private String name;
 
+    @NotEmpty
+    @NotNull
     private String description;
 
     private double price;

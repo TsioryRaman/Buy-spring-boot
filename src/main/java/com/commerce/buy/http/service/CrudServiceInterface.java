@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface CrudServiceInterface<T> {
-    ResponseEntity<T> create(EntityDto<T> entityDto) throws Exception;
+    ResponseEntity<T> create(EntityDto<T> entityDto);
     ResponseEntity<List<T>> getAll();
 
     ResponseEntity<T> getById(int id);

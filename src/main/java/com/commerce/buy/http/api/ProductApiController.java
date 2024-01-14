@@ -1,23 +1,23 @@
 package com.commerce.buy.http.api;
 
-import com.commerce.buy.http.service.CrudAdvancedServiceInterface;
-import com.commerce.buy.http.service.CrudServiceInterface;
 import com.commerce.buy.domain.product.dto.ProductDto;
 import com.commerce.buy.domain.product.model.Product;
+import com.commerce.buy.http.service.CrudAdvancedServiceInterface;
 import com.commerce.buy.infrastructure.repository.ProductRepository;
 import com.commerce.buy.infrastructure.search.dto.RequestDto;
 import com.commerce.buy.infrastructure.search.dto.SearchRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/product")
+@Validated
 public class ProductApiController {
     @Autowired
     CrudAdvancedServiceInterface<Product> productService;
@@ -26,9 +26,9 @@ public class ProductApiController {
     ProductRepository productRepository;
 
     @PostMapping(path = "findName")
-    public List<Product> findByName(@RequestBody RequestDto requestDto)
+    public List<Product> findByName(@RequestBody SearchRequestDto requestDto)
     {
-        return this.productService.findByName(requestDto.getSearchRequestDto());
+        return this.productService.findByName(requestDto);
     }
 
     @PostMapping(path = "findMultiple")
@@ -38,13 +38,8 @@ public class ProductApiController {
     }
 
     @PostMapping(path="")
-    public ResponseEntity createProduct(@RequestBody ProductDto productDto) {
-        try{
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody  ProductDto productDto) {
             return this.productService.create(productDto);
-        }catch (Exception e)
-        {
-            return new ResponseEntity<>((new HashMap<String,String>()).put("error",e.getMessage()), HttpStatus.CONFLICT);
-        }
     }
 
     @GetMapping()

@@ -3,7 +3,7 @@ package com.commerce.buy.http.api;
 import com.commerce.buy.domain.user.dto.UserDTO;
 import com.commerce.buy.domain.user.model.User;
 import com.commerce.buy.domain.user.UserServiceInterface;
-import com.commerce.buy.infrastructure.exception.NoSuchEntityException;
+import com.commerce.buy.infrastructure.exception.entityException.NoSuchEntityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
