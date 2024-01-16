@@ -51,7 +51,7 @@ public class CategoryDao implements EntityDao<Category> {
     }
 
     @Override
-    public Category update(int entityId) {
+    public Category update(int id,EntityDto<Category> entityId) {
         return null;
     }
 

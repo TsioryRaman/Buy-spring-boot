@@ -1,13 +1,14 @@
 package com.commerce.buy.domain.user.model;
 
 import com.commerce.buy.domain.blog.model.Blog;
+import com.commerce.buy.domain.model.EntityDateTimeStamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-public class User {
+public class User extends EntityDateTimeStamp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

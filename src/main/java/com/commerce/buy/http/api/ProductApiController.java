@@ -60,5 +60,10 @@ public class ProductApiController {
         return this.productService.findByName(new SearchRequestDto("name",name));
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Product> updateById(@PathVariable int id, @RequestBody ProductDto productDto)
+    {
+        return this.productService.update(id,productDto);
+    }
 
 }

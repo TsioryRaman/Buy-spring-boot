@@ -36,14 +36,13 @@ public class ProductDao implements EntityDao<Product> {
 
         this.productRepository.save(product);
 
-        return null;
+        return product;
     }
 
     @Override
     public Product findById(int id) {
         Optional<Product> product = this.productRepository.findById(id);
-        if(product.isEmpty())
-            throw new NoSuchEntityException("Ce produit n'existe pas");
+        this.throwIfProductNull(product.isPresent());
         return product.get();
     }
 
@@ -53,8 +52,13 @@ public class ProductDao implements EntityDao<Product> {
     }
 
     @Override
-    public Product update(int entityId) {
-        return null;
+    public Product update(int id,EntityDto<Product> entityDto) {
+        Optional<Product> productOptional = this.productRepository.findById(id);
+        this.throwIfProductNull(productOptional.isPresent());
+        entityDto.setEntity(productOptional.get());
+        entityDto.hydrate();
+
+        return this.productRepository.save(entityDto.getEntity());
     }
 
     @Override
@@ -65,5 +69,11 @@ public class ProductDao implements EntityDao<Product> {
     @Override
     public List<Product> findByField(List<RequestDto> requestDtos) {
         return this.productRepository.findAll(this.filter.getSearchSpecification(requestDtos.stream().map(RequestDto::getSearchRequestDto).toList(), FilterSpecification.TYPE.OR));
+    }
+
+    private void throwIfProductNull(Boolean isPresent)
+    {
+        if(!isPresent)
+            throw new EntityNotFoundException("Le produit n'existe pas");
     }
 }

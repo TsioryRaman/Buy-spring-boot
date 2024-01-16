@@ -10,7 +10,7 @@ public interface EntityDao<T> {
     T findById(int id);
 
     T delete(int entityId);
-    T update(int entityId);
+    T update(int id,EntityDto<T> entityDto);
     List<T> findAll();
 
     List<T> findByField(List<RequestDto> requestDtos);

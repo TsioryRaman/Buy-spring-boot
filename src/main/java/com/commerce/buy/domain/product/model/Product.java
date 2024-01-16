@@ -1,6 +1,7 @@
 package com.commerce.buy.domain.product.model;
 
 import com.commerce.buy.domain.category.model.Category;
+import com.commerce.buy.domain.model.EntityDateTimeStamp;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -8,11 +9,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 
 @Entity
-public class Product {
+public class Product extends EntityDateTimeStamp {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     @Column(length = 255,nullable = false,unique = true)
     private String name;
     @Column(length = 255,nullable = true)
@@ -22,10 +22,6 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
-    @CreationTimestamp
-    private Date created_at;
-    @UpdateTimestamp
-    public Date updated_at;
     public int getId() {
         return id;
     }
@@ -56,22 +52,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
-    }
-
-    public Date getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
     }
 
     public int getLiked() {

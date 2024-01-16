@@ -3,10 +3,10 @@ package com.commerce.buy.domain.product.service;
 import com.commerce.buy.domain.EntityDao;
 import com.commerce.buy.domain.EntityDto;
 import com.commerce.buy.domain.product.event.ProductCreatedEvent;
+import com.commerce.buy.domain.product.event.ProductUpdatedEvent;
 import com.commerce.buy.domain.product.event.ProductViewEvent;
 import com.commerce.buy.domain.product.model.Product;
 import com.commerce.buy.http.service.CrudAdvancedServiceInterface;
-import com.commerce.buy.infrastructure.exception.entityException.NoSuchEntityException;
 import com.commerce.buy.infrastructure.repository.ProductRepository;
 import com.commerce.buy.infrastructure.search.dto.RequestDto;
 import com.commerce.buy.infrastructure.search.dto.SearchRequestDto;
@@ -17,9 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService implements CrudAdvancedServiceInterface<Product> {
@@ -42,6 +40,14 @@ public class ProductService implements CrudAdvancedServiceInterface<Product> {
         this.eventPublisher.publishEvent(new ProductCreatedEvent(product));
 
         return new ResponseEntity<Product>(product, HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<Product> update(int id,EntityDto<Product> entityDto) {
+        Product product = this.entityDao.update(id,entityDto);
+        this.eventPublisher.publishEvent(new ProductUpdatedEvent(product));
+
+        return new ResponseEntity<Product>(product,HttpStatus.OK);
     }
 
     @Override

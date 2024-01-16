@@ -42,8 +42,6 @@ public class ProductDto implements EntityDto<Product> {
     public void hydrate() {
         product.setName(this.getName());
         product.setDescription(this.getDescription());
-        product.setCreated_at(new Date());
-        product.setUpdated_at(new Date());
         product.setPrice(this.getPrice());
         product.setLiked(this.getLiked());
     }

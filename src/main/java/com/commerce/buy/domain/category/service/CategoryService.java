@@ -27,6 +27,11 @@ public class CategoryService implements CrudServiceInterface<Category> {
     }
 
     @Override
+    public ResponseEntity<Category> update(int id,EntityDto<Category> entityDto) {
+        return null;
+    }
+
+    @Override
     public ResponseEntity<List<Category>> getAll() {
         return null;
     }
