@@ -7,7 +7,6 @@ public class ProductUpdatedEvent extends ApplicationEvent {
     public ProductUpdatedEvent(Object source) {
         super(source);
     }
-
     public Product getProduct()
     {
         return (Product) this.source;
