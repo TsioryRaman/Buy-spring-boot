@@ -1,8 +1,8 @@
 package com.commerce.buy.domain.user.service;
 
 import com.commerce.buy.domain.user.event.UserCreatedEvent;
-import com.commerce.buy.infrastructure.exception.entityException.ConflictException;
-import com.commerce.buy.infrastructure.exception.entityException.NoSuchEntityException;
+import com.commerce.buy.common.exception.entityException.ConflictException;
+import com.commerce.buy.common.exception.entityException.NoSuchEntityException;
 import com.commerce.buy.infrastructure.repository.UserRepository;
 import com.commerce.buy.domain.user.dto.UserDTO;
 import com.commerce.buy.domain.user.UserServiceInterface;

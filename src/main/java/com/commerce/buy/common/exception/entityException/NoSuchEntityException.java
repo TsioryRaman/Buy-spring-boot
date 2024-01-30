@@ -1,4 +1,4 @@
-package com.commerce.buy.infrastructure.exception.entityException;
+package com.commerce.buy.common.exception.entityException;
 
 import jakarta.persistence.EntityNotFoundException;
 

@@ -1,8 +1,8 @@
-package com.commerce.buy.infrastructure.exception.handler;
+package com.commerce.buy.common.exception.handler;
 
-import com.commerce.buy.infrastructure.error.ApiError;
-import com.commerce.buy.infrastructure.exception.entityException.ConflictException;
-import com.commerce.buy.infrastructure.exception.entityException.NoSuchEntityException;
+import com.commerce.buy.common.error.ApiError;
+import com.commerce.buy.common.exception.entityException.ConflictException;
+import com.commerce.buy.common.exception.entityException.NoSuchEntityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

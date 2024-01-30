@@ -2,7 +2,7 @@ package com.commerce.buy.domain.user;
 
 import com.commerce.buy.domain.user.dto.UserDTO;
 import com.commerce.buy.domain.user.model.User;
-import com.commerce.buy.infrastructure.exception.entityException.NoSuchEntityException;
+import com.commerce.buy.common.exception.entityException.NoSuchEntityException;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

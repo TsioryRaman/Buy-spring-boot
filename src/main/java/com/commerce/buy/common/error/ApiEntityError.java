@@ -1,4 +1,4 @@
-package com.commerce.buy.infrastructure.error;
+package com.commerce.buy.common.error;
 
 import org.springframework.http.HttpStatus;
 
