@@ -60,8 +60,8 @@ public class ProductService implements CrudAdvancedServiceInterface<Product> {
     @Override
     public ResponseEntity<Product> getById(int id) {
         Product product = this.entityDao.findById(id);
+        System.out.println("id = " + id + " debut async");
         this.eventPublisher.publishEvent(new ProductViewEvent(product));
-
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
